@@ -4,6 +4,7 @@ import ratelimiter from "./middleware/rate_limiter.js";
 
 import routes from "./routes/routes.js";
 import cors from "cors";
+import job from "./config/cron.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(cors());
 app.use(express.json());
 app.use(ratelimiter);
 app.use("/api/expenses", routes);
+if(process.env.NODE_ENV === "production") job.start();
 
 
 const PORT = process.env.PORT || 3000;
@@ -52,6 +54,14 @@ async function init_db() {
     process.exit(1);
   }
 }
+
+// health check 
+app.get("/api/health",(req,res) => 
+
+{
+  res.status(200).json({status:"Server is sick!"});
+});
+
 
 init_db().then(() => {
   app.listen(PORT, () => {
