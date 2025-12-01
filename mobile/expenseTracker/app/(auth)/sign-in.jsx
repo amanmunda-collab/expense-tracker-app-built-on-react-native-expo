@@ -1,9 +1,9 @@
 import { useSignIn } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
-import { Text, TextInput, TouchableOpacity, View,Image} from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import { useState } from "react";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { styles } from "@/assets/styles/auth.styles.js"
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants/colors";
@@ -35,11 +35,13 @@ export default function Page() {
       } else {
         // If the status isn't complete, check why. User might need to
         // complete further steps.
-        console.error(JSON.stringify(signInAttempt, null, 2));
+       // console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
+    //  console.log(err);
       if (err.errors?.[0]?.code === "form_password_incorrect") {
         setError("Password is incorrect. Please try again.");
+
       } else {
         setError("An error occurred. Please try again.");
       }
@@ -47,7 +49,7 @@ export default function Page() {
   };
 
   return (
-   
+
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
       contentContainerStyle={{ flexGrow: 1 }}
@@ -55,7 +57,7 @@ export default function Page() {
       enableAutomaticScroll={true}
       extraScrollHeight={30}
     >
-   <View style={styles.container}>
+      <View style={styles.container}>
         <Image source={require("../../assets/images/revenue-i4.png")} style={styles.illustration} />
         <Text style={styles.title}>Welcome Back</Text>
 

@@ -23,7 +23,7 @@ export default function SignUpScreen() {
 
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     // Start sign-up process using email and password provided
     try {
@@ -70,12 +70,12 @@ export default function SignUpScreen() {
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
-        console.error(JSON.stringify(signUpAttempt, null, 2))
+       // console.error(JSON.stringify(signUpAttempt, null, 2))
       }
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2))
+     // console.error(JSON.stringify(err, null, 2))
     }
   }
 
